@@ -30,9 +30,10 @@ else()
   message(STATUS "git-chglog not found, changelog will not be updated")
 endif()
 
-
 enable_testing()
 
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/deps/fmt)
 link_libraries(fmt::fmt-header-only)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/deps/doctest)
 add_subdirectory(src)
+add_subdirectory(test)

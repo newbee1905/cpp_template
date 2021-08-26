@@ -14,3 +14,7 @@ Submodules:
 
 * [fmt](https://github.com/fmtlib/fmt)
 * [doctest](https://github.com/onqtam/doctest)
+
+## Update all submodules
+
+A `CMake` target `update_dependencies` can be used to update all submodules

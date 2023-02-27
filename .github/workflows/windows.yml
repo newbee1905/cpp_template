@@ -62,6 +62,6 @@ jobs:
           title: "Release: $version"
           tag: "window-v$semver"
           draft: false
-          regex: "/^Release: windiw-#{semver}$/i"
+          # regex: "/^Release: windiw-#{semver}$/i"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

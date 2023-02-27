@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.16)
+cmake_minimum_required(VERSION 3.22)
 
 get_filename_component(ROOT ${CMAKE_CURRENT_SOURCE_DIR} NAME)
 project(${ROOT} CXX)

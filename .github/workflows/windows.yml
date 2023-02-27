@@ -49,11 +49,9 @@ jobs:
       # See https://cmake.org/cmake/help/latest/manual/ctest.1.html for more detail
       run: ctest -C $BUILD_TYPE
 
-    - uses: CupOfTea696/gh-action-auto-release@v1.0.0
-      with:
-        title: "Release: $version"
-        tag: "window-v$semver"
-        draft: false
-        # regex: "/^Release: windiw-#{semver}$/i"
+    - name: Upload the artifacts
+      uses: skx/github-action-publish-binaries@master
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        args: 'example-*'

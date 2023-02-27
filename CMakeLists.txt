@@ -7,8 +7,8 @@ set(CMAKE_GENERATOR Ninja)
 
 # update submodules
 add_custom_target(update_dependencies
-    COMMAND ${PROXY} git submodule foreach git pull
-    WORKING_DIRECTORY ${CMAKE_CURRENT_LIST_DIR}
+	COMMAND ${PROXY} git submodule foreach git pull
+	WORKING_DIRECTORY ${CMAKE_CURRENT_LIST_DIR}
 )
 
 # cpp compiler settings
@@ -17,23 +17,23 @@ set(CMAKE_CXX_STANDARD_REQUIRED TRUE)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
 if(MSVC)
-  # add_compile_options(/fsanitize=address)
-  set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
-  add_compile_options(/Zc:__cplusplus) # see https://docs.microsoft.com/en-us/cpp/build/reference/zc-cplusplus?view=msvc-160 for detail
+	# add_compile_options(/fsanitize=address)
+	set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
+	add_compile_options(/Zc:__cplusplus) # see https://docs.microsoft.com/en-us/cpp/build/reference/zc-cplusplus?view=msvc-160 for detail
 endif()
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
 find_program(GIT_CHGLOG git-chglog)
 if(GIT_CHGLOG)
-  message(STATUS "Found git-chglog:${GIT_CHGLOG}")
-  execute_process(
-    COMMAND ${GIT_CHGLOG}
-    OUTPUT_FILE CHANGELOG.md
-    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-  )
+	message(STATUS "Found git-chglog:${GIT_CHGLOG}")
+	execute_process(
+		COMMAND ${GIT_CHGLOG}
+		OUTPUT_FILE CHANGELOG.md
+		WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+	)
 else()
-  message(STATUS "git-chglog not found, changelog will not be updated")
+	message(STATUS "git-chglog not found, changelog will not be updated")
 endif()
 
 enable_testing()
@@ -44,3 +44,5 @@ add_compile_definitions(DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/deps/doctest)
 add_subdirectory(src)
 add_subdirectory(test)
+
+set_target_properties(src PROPERTIES OUTPUT_NAME "cpp-git")
